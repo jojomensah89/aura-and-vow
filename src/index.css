@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+  .font-playfair {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  .font-bodoni {
+    font-family: 'Bodoni Moda', serif;
+  }
+  .font-script-alex {
+    font-family: 'Alex Brush', cursive;
+  }
+  .font-script-vibes {
+    font-family: 'Great Vibes', cursive;
+  }
+  .font-script-pinyon {
+    font-family: 'Pinyon Script', cursive;
+  }
+  .font-sans-clean {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* Paper textures and print finishes */
+.paper-linen {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 8px 8px;
+}
+
+.paper-deckled {
+  box-shadow: 
+    0 1px 2px rgba(0,0,0,0.06), 
+    0 4px 12px rgba(0,0,0,0.04), 
+    inset 0 0 16px rgba(180, 160, 140, 0.12);
+}
+
+.gold-foil-text {
+  background: linear-gradient(135deg, #a67c38 0%, #e5c378 30%, #ffd78a 50%, #c4994e 75%, #8f6527 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-foil-border {
+  border-image: linear-gradient(135deg, #bfa063, #edd8a3, #caa359, #aa843a) 1;
+}
+
+.rose-gold-foil-text {
+  background: linear-gradient(135deg, #b86f6f 0%, #ebb2b2 30%, #ffd1d1 50%, #c48383 75%, #9e5555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.silver-foil-text {
+  background: linear-gradient(135deg, #70757a 0%, #d6d9dc 30%, #ffffff 50%, #a4abb1 75%, #5d6369 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2D9CC;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4B59E;
+}
+

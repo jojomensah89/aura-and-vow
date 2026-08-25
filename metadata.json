@@ -1,0 +1,6 @@
+{
+  "name": "Aura & Vow | Bespoke Digital Wedding Suites",
+  "description": "Browse, personalize, and download luxury digital wedding stationery suites including invitations, RSVP cards, schedules, menus, and thank you cards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
