@@ -1,4 +1,5 @@
 import { ColorPalette, CoupleDetails, FontPreset, WeddingSuite } from '../types';
+import { GREETINGS_TEMPLATES } from './greetingsData';
 
 export const COLOR_PALETTES: ColorPalette[] = [
   {
@@ -135,6 +136,21 @@ export const FONT_PRESETS: FontPreset[] = [
 ];
 
 export const DEFAULT_COUPLE_DETAILS: CoupleDetails = {
+  // General & Multi-occasion Card Fields
+  title: 'The Marriage of Martha Sinclair & Robert Hawthorne',
+  headline: 'THE MARRIAGE OF',
+  honoreeOrCouple: 'Martha Sinclair & Robert Hawthorne',
+  eventDate: 'Saturday, October 24, 2026',
+  eventTime: "Two o'clock in the afternoon",
+  hostName: 'Together with their families',
+  subtext: 'Request the pleasure of your company at the celebration of their marriage',
+  rsvpPhoneOrEmail: 'rsvp@marthaandrobert2026.com',
+  greetingHeadline: 'Thinking of You with Warmest Wishes',
+  insideLeftText: 'May your days be filled with happiness, love, and light.',
+  insideRightMessage: 'Wishing you the happiest celebration and a wonderful year ahead!',
+  senderSignoff: 'With love & warmest regards,',
+
+  // Couple details
   partner1FirstName: 'Martha',
   partner1LastName: 'Sinclair',
   partner2FirstName: 'Robert',
@@ -394,9 +410,13 @@ export const SAMPLE_COUPLES: Array<{
 ];
 
 export const WEDDING_SUITES: WeddingSuite[] = [
+  ...GREETINGS_TEMPLATES,
   {
     id: 'suite-blush-rose-botanical',
     title: 'The Botanical Blush Liturgy',
+    category: 'weddings',
+    subcategory: 'Garden & Botanical',
+    format: 'stationery-suite',
     collectionName: 'Glasshouse & Botanical Gardens',
     tagline: 'Watercolor blush roses, sage eucalyptus & gilded double-line frame',
     description: 'Inspired by romantic garden ceremonies. Features lush hand-painted blush rose and peach peony corner florals, dual-column liturgical service sequence, officiating minister credits, and refined gold hairline framing.',

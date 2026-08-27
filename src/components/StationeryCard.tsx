@@ -1123,6 +1123,300 @@ export const StationeryCard: React.FC<StationeryCardProps> = ({
           </div>
         </div>
       )}
+
+      {/* CARD TYPE: BIRTHDAY INVITATION & CELEBRATION */}
+      {cardType === 'birthday_card' && (
+        <div className="relative z-10 flex flex-col items-center justify-between h-full text-center py-5 px-4 max-w-[340px] mx-auto">
+          {/* Top Motif / Age Badge */}
+          <div className="flex flex-col items-center space-y-1.5 pt-1">
+            <MotifGraphics
+              type={motif === 'none' ? 'birthday_cake' : motif}
+              color={palette.accent}
+              foil={palette.foil}
+              size={32}
+            />
+            <p className={`text-[9.5px] sm:text-[10px] tracking-[0.25em] uppercase opacity-85 font-medium ${bodyFontClass}`}>
+              {details.invitationHeadline || 'PLEASE JOIN US TO CELEBRATE'}
+            </p>
+          </div>
+
+          {/* Photo Slot if available */}
+          {details.photoUrl && (
+            <div className="my-2 relative w-36 h-36 rounded-full overflow-hidden border-2 shadow-md p-1" style={{ borderColor: palette.accent }}>
+              <img
+                src={details.photoUrl}
+                alt={details.honoreeName || 'Honoree'}
+                className="w-full h-full object-cover rounded-full"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          )}
+
+          {/* Honoree & Milestone */}
+          <div className="my-auto py-2 space-y-1 w-full">
+            <h2
+              className={`text-2xl sm:text-3xl tracking-tight font-normal leading-tight ${headingFontClass} ${
+                palette.foil !== 'none' ? foilTextClass : ''
+              }`}
+            >
+              {details.honoreeName || `${details.partner1FirstName}'s Birthday`}
+            </h2>
+
+            {details.birthdayAge && (
+              <span className={`text-xl sm:text-2xl block my-0.5 ${scriptFontClass}`} style={{ color: palette.accent }}>
+                Turning {details.birthdayAge}
+              </span>
+            )}
+
+            <p className={`text-[9.5px] max-w-[260px] mx-auto tracking-[0.16em] uppercase opacity-80 leading-relaxed ${bodyFontClass}`}>
+              {details.ceremonySubtext || 'An Evening of Dinner, Drinks & Merriment'}
+            </p>
+          </div>
+
+          {/* Celebration Logistics */}
+          <div className="space-y-2 w-full flex flex-col items-center pb-1">
+            <div
+              className="py-1.5 border-y w-[88%] flex flex-col items-center justify-center space-y-0.5"
+              style={{ borderColor: `${palette.border}90` }}
+            >
+              <div className={`text-xs sm:text-[13px] tracking-[0.2em] uppercase font-semibold ${headingFontClass}`} style={{ color: palette.accent }}>
+                {details.weddingDate}
+              </div>
+              <div className={`text-[9.5px] tracking-[0.15em] opacity-85 ${bodyFontClass}`}>
+                {details.weddingTime}
+              </div>
+            </div>
+
+            <div className="space-y-0.5">
+              <div className={`text-xs font-semibold tracking-wider ${headingFontClass}`}>
+                {details.venueName}
+              </div>
+              <div className={`text-[9px] tracking-wide opacity-80 ${bodyFontClass}`}>
+                {details.venueAddress} · {details.cityState}
+              </div>
+            </div>
+
+            <div className="pt-1 text-[8.5px] tracking-wider opacity-85">
+              RSVP by {details.rsvpDeadline || 'July 1st'} to {details.rsvpWebsite || 'the host'}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CARD TYPE: BABY SHOWER & BIRTH ANNOUNCEMENT */}
+      {cardType === 'baby_card' && (
+        <div className="relative z-10 flex flex-col items-center justify-between h-full text-center py-5 px-4 max-w-[340px] mx-auto">
+          <div className="flex flex-col items-center space-y-1.5 pt-1">
+            <MotifGraphics
+              type={motif === 'none' ? 'baby_stroller' : motif}
+              color={palette.accent}
+              foil={palette.foil}
+              size={32}
+            />
+            <p className={`text-[9.5px] sm:text-[10px] tracking-[0.25em] uppercase opacity-85 font-medium ${bodyFontClass}`}>
+              {details.invitationHeadline || 'A SWEET LITTLE ONE IS ON THE WAY'}
+            </p>
+          </div>
+
+          {details.photoUrl && (
+            <div className="my-2 relative w-36 h-44 rounded-t-full overflow-hidden border-2 shadow-md p-1" style={{ borderColor: palette.accent }}>
+              <img
+                src={details.photoUrl}
+                alt="Baby announcement"
+                className="w-full h-full object-cover rounded-t-full"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          )}
+
+          <div className="my-auto py-2 space-y-1 w-full">
+            <p className={`text-xs tracking-[0.2em] uppercase opacity-75 font-medium ${bodyFontClass}`}>
+              BABY SHOWER HONORING
+            </p>
+            <h2
+              className={`text-2xl sm:text-3xl tracking-tight font-normal leading-tight ${headingFontClass} ${
+                palette.foil !== 'none' ? foilTextClass : ''
+              }`}
+            >
+              {details.honoreeName || `${details.partner1FirstName}`}
+            </h2>
+            <p className={`text-[9.5px] max-w-[260px] mx-auto tracking-[0.16em] uppercase opacity-80 leading-relaxed ${bodyFontClass}`}>
+              {details.ceremonySubtext || 'Join us for brunch, treats & sweet celebrations'}
+            </p>
+          </div>
+
+          <div className="space-y-2 w-full flex flex-col items-center pb-1">
+            <div
+              className="py-1.5 border-y w-[88%] flex flex-col items-center justify-center space-y-0.5"
+              style={{ borderColor: `${palette.border}90` }}
+            >
+              <div className={`text-xs sm:text-[13px] tracking-[0.2em] uppercase font-semibold ${headingFontClass}`} style={{ color: palette.accent }}>
+                {details.weddingDate}
+              </div>
+              <div className={`text-[9.5px] tracking-[0.15em] opacity-85 ${bodyFontClass}`}>
+                {details.weddingTime}
+              </div>
+            </div>
+
+            <div className="space-y-0.5">
+              <div className={`text-xs font-semibold tracking-wider ${headingFontClass}`}>
+                {details.venueName}
+              </div>
+              <div className={`text-[9px] tracking-wide opacity-80 ${bodyFontClass}`}>
+                {details.venueAddress} · {details.cityState}
+              </div>
+            </div>
+
+            <div className="pt-1 text-[8.5px] tracking-wider opacity-85">
+              Registry: <span className="font-semibold">{details.rsvpWebsite || 'Target & Babylist'}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CARD TYPE: HOLIDAY & SEASONAL GREETINGS */}
+      {cardType === 'holiday_card' && (
+        <div className="relative z-10 flex flex-col items-center justify-between h-full text-center py-5 px-4 max-w-[340px] mx-auto">
+          <div className="flex flex-col items-center space-y-1 pt-1">
+            <MotifGraphics
+              type={motif === 'none' ? 'holiday_pine' : motif}
+              color={palette.accent}
+              foil={palette.foil}
+              size={32}
+            />
+            <span className={`text-2xl sm:text-3xl pt-1 ${scriptFontClass}`} style={{ color: palette.accent }}>
+              Joy & Warmth
+            </span>
+          </div>
+
+          {details.photoUrl && (
+            <div className="my-2 relative w-full h-44 rounded-sm overflow-hidden border shadow-md" style={{ borderColor: palette.border }}>
+              <img
+                src={details.photoUrl}
+                alt="Family Holiday Portrait"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          )}
+
+          <div className="my-auto py-2 space-y-1.5">
+            <h2
+              className={`text-xl sm:text-2xl tracking-[0.2em] font-normal uppercase ${headingFontClass} ${
+                palette.foil !== 'none' ? foilTextClass : ''
+              }`}
+            >
+              {details.invitationHeadline || 'SEASON’S GREETINGS'}
+            </h2>
+            <p className={`text-[10px] leading-relaxed max-w-[270px] mx-auto opacity-85 ${bodyFontClass}`}>
+              {details.ceremonySubtext ||
+                'Wishing you a holiday season filled with peace, love, and light, and a wonderful New Year ahead.'}
+            </p>
+          </div>
+
+          <div className="pt-2 border-t w-[88%] text-center space-y-0.5" style={{ borderColor: `${palette.border}80` }}>
+            <span className={`text-lg sm:text-xl block ${scriptFontClass}`} style={{ color: palette.accent }}>
+              {details.senderSignoff || `With Love, The ${details.partner1LastName || 'Family'}`}
+            </span>
+            <p className={`text-[8.5px] uppercase tracking-[0.2em] opacity-75 font-mono ${bodyFontClass}`}>
+              EST. 2026
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* CARD TYPE: COCKTAIL / DINNER / PARTY INVITATION */}
+      {cardType === 'party_card' && (
+        <div className="relative z-10 flex flex-col items-center justify-between h-full text-center py-5 px-4 max-w-[340px] mx-auto">
+          <div className="flex flex-col items-center space-y-1 pt-1">
+            <MotifGraphics
+              type={motif === 'none' ? 'cocktail_glass' : motif}
+              color={palette.accent}
+              foil={palette.foil}
+              size={32}
+            />
+            <p className={`text-[9.5px] sm:text-[10px] tracking-[0.25em] uppercase opacity-85 font-medium ${bodyFontClass}`}>
+              {details.invitationHeadline || 'AN EVENING SOIREE'}
+            </p>
+          </div>
+
+          <div className="my-auto py-2 space-y-1 w-full">
+            <h2
+              className={`text-2xl sm:text-3xl tracking-tight font-normal leading-tight ${headingFontClass} ${
+                palette.foil !== 'none' ? foilTextClass : ''
+              }`}
+            >
+              {details.honoreeName || 'Cocktails & Dinner'}
+            </h2>
+            <p className={`text-[9.5px] max-w-[260px] mx-auto tracking-[0.16em] uppercase opacity-80 leading-relaxed ${bodyFontClass}`}>
+              {details.ceremonySubtext || 'Craft drinks, shared plates & lively conversation'}
+            </p>
+          </div>
+
+          <div className="space-y-2 w-full flex flex-col items-center pb-1">
+            <div
+              className="py-1.5 border-y w-[88%] flex flex-col items-center justify-center space-y-0.5"
+              style={{ borderColor: `${palette.border}90` }}
+            >
+              <div className={`text-xs sm:text-[13px] tracking-[0.2em] uppercase font-semibold ${headingFontClass}`} style={{ color: palette.accent }}>
+                {details.weddingDate}
+              </div>
+              <div className={`text-[9.5px] tracking-[0.15em] opacity-85 ${bodyFontClass}`}>
+                {details.weddingTime}
+              </div>
+            </div>
+
+            <div className="space-y-0.5">
+              <div className={`text-xs font-semibold tracking-wider ${headingFontClass}`}>
+                {details.venueName}
+              </div>
+              <div className={`text-[9px] tracking-wide opacity-80 ${bodyFontClass}`}>
+                {details.venueAddress} · {details.cityState}
+              </div>
+            </div>
+
+            <div className="pt-1 text-[8.5px] tracking-wider opacity-85">
+              RSVP by {details.rsvpDeadline || 'Friday'} · {details.dressCode || 'Smart Casual'}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CARD TYPE: MULTIPURPOSE GREETING CARD (FOLDED / FLAT) */}
+      {cardType === 'greeting_card' && (
+        <div className="relative z-10 flex flex-col items-center justify-between h-full text-center py-6 px-4 max-w-[340px] mx-auto">
+          {/* Top Motifs */}
+          <div className="flex flex-col items-center space-y-2 pt-2">
+            <MotifGraphics
+              type={motif === 'none' ? 'sparkle_stars' : motif}
+              color={palette.accent}
+              foil={palette.foil}
+              size={34}
+            />
+          </div>
+
+          {/* Cover Message */}
+          <div className="my-auto py-3 space-y-2">
+            <h2
+              className={`text-2xl sm:text-3xl tracking-tight font-normal leading-snug ${headingFontClass} ${
+                palette.foil !== 'none' ? foilTextClass : ''
+              }`}
+            >
+              {details.invitationHeadline || 'Thinking of You'}
+            </h2>
+            <p className={`text-xs sm:text-sm leading-relaxed opacity-85 max-w-[260px] mx-auto ${bodyFontClass}`}>
+              {details.ceremonySubtext || 'Sending warmest thoughts, heartfelt blessings, and smiles your way.'}
+            </p>
+          </div>
+
+          {/* Bottom Signoff */}
+          <div className="pt-3 border-t w-[80%] text-center" style={{ borderColor: `${palette.border}80` }}>
+            <span className={`text-xl sm:text-2xl block ${scriptFontClass}`} style={{ color: palette.accent }}>
+              {details.senderSignoff || `${details.partner1FirstName || 'With warmth'}`}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

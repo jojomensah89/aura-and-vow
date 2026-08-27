@@ -5,13 +5,11 @@ import { WaxSealBadge } from './MotifGraphics';
 interface HeaderProps {
   currentView: 'catalog' | 'customizer';
   onNavigate: (view: 'catalog' | 'customizer') => void;
-  onOpenPrintGuide: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentView,
-  onNavigate,
-  onOpenPrintGuide
+  onNavigate
 }) => {
   return (
     <header id="main-header" className="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#EAE1D1]">
@@ -23,13 +21,13 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onNavigate('catalog')}
             className="flex items-center gap-3.5 cursor-pointer group"
           >
-            <WaxSealBadge initials="A&V" className="group-hover:rotate-6 transition-transform" />
+            <WaxSealBadge initials="I&N" color="#8A7258" className="group-hover:rotate-6 transition-transform" />
             <div className="flex flex-col">
-              <span className="font-cinzel text-xl sm:text-2xl tracking-[0.2em] font-semibold text-[#2C241E]">
-                AURA & VOW
+              <span className="font-cormorant text-2xl sm:text-3xl tracking-[0.15em] font-medium text-[#2C241E]">
+                ISLE &amp; NOTE
               </span>
-              <span className="text-[9.5px] uppercase tracking-[0.25em] text-[#8C7A6B] -mt-0.5 font-medium">
-                Bespoke Wedding Suites & Studio
+              <span className="text-[9px] uppercase tracking-[0.28em] text-[#8C7A6B] -mt-1 font-medium">
+                Modern Invitations &amp; Greeting Cards
               </span>
             </div>
           </div>
@@ -45,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              Browse Collections
+              Browse Cards &amp; Invitations
             </button>
 
             <button
@@ -57,16 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              Live Suite Customizer
-            </button>
-
-            <button
-              id="nav-link-printguide"
-              onClick={onOpenPrintGuide}
-              className="hover:text-[#2C241E] transition-colors cursor-pointer flex items-center gap-1.5 py-1"
-            >
-              <Printer className="w-3.5 h-3.5 text-[#8A7968]" />
-              <span>Paper & Print Guide</span>
+              Card Design Studio
             </button>
           </nav>
 
@@ -80,12 +69,12 @@ export const Header: React.FC<HeaderProps> = ({
               {currentView === 'catalog' ? (
                 <>
                   <Sparkles className="w-3.5 h-3.5 text-[#E5C378]" />
-                  <span>Customize Your Suite</span>
+                  <span>Personalize Design</span>
                 </>
               ) : (
                 <>
                   <Layers className="w-3.5 h-3.5" />
-                  <span>Explore All Suites</span>
+                  <span>Explore All Designs</span>
                 </>
               )}
             </button>
@@ -95,3 +84,4 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
+

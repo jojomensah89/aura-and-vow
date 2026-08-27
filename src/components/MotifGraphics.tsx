@@ -307,6 +307,185 @@ export const MotifGraphics: React.FC<MotifProps> = ({
     );
   }
 
+  if (type === 'birthday_cake') {
+    return (
+      <svg
+        width={size * 1.2}
+        height={size * 1.2}
+        viewBox="0 0 60 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        {/* Candle & Flame */}
+        <path d="M30 11C28.5 13 28.5 15 30 17C31.5 15 31.5 13 30 11Z" fill="currentColor" />
+        <line x1="30" y1="17" x2="30" y2="24" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        {/* Top Cake Tier */}
+        <rect x="20" y="24" width="20" height="12" rx="1.5" stroke="currentColor" strokeWidth="1" fill="none" />
+        <line x1="20" y1="28" x2="40" y2="28" stroke="currentColor" strokeWidth="0.6" strokeDasharray="1.5 1.5" />
+        {/* Bottom Cake Tier */}
+        <rect x="14" y="36" width="32" height="14" rx="2" stroke="currentColor" strokeWidth="1" fill="none" />
+        <line x1="14" y1="42" x2="46" y2="42" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 2" />
+        {/* Cake Stand / Base */}
+        <line x1="10" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'cocktail_glass') {
+    return (
+      <svg
+        width={size * 1.2}
+        height={size * 1.2}
+        viewBox="0 0 60 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        <path d="M16 18L30 35L44 18H16Z" stroke="currentColor" strokeWidth="1.1" fill="none" strokeLinejoin="round" />
+        <line x1="21" y1="23" x2="39" y2="23" stroke="currentColor" strokeWidth="0.7" strokeDasharray="2 2" />
+        <line x1="30" y1="35" x2="30" y2="49" stroke="currentColor" strokeWidth="1.1" />
+        <line x1="20" y1="49" x2="40" y2="49" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+        {/* Olive / garnish stick */}
+        <line x1="35" y1="12" x2="27" y2="28" stroke="currentColor" strokeWidth="0.8" />
+        <circle cx="31" cy="20" r="2" fill="currentColor" fillOpacity="0.7" />
+      </svg>
+    );
+  }
+
+  if (type === 'sparkle_stars') {
+    return (
+      <svg
+        width={size * 1.4}
+        height={size * 0.9}
+        viewBox="0 0 80 50"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        {/* Center Sparkle */}
+        <path d="M40 8 C40 18 40 18 50 18 C40 18 40 18 40 28 C40 18 40 18 30 18 C40 18 40 18 40 8Z" fill="currentColor" />
+        {/* Left Sparkle */}
+        <path d="M20 22 C20 28 20 28 26 28 C20 28 20 28 20 34 C20 28 20 28 14 28 C20 28 20 28 20 22Z" fill="currentColor" fillOpacity="0.85" />
+        {/* Right Sparkle */}
+        <path d="M60 20 C60 26 60 26 66 26 C60 26 60 26 60 32 C60 26 60 26 54 26 C60 26 60 26 60 20Z" fill="currentColor" fillOpacity="0.85" />
+        {/* Micro Dots */}
+        <circle cx="32" cy="38" r="1" fill="currentColor" />
+        <circle cx="48" cy="38" r="1" fill="currentColor" />
+        <circle cx="38" cy="44" r="0.8" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  if (type === 'baby_stroller') {
+    return (
+      <svg
+        width={size * 1.2}
+        height={size * 1.2}
+        viewBox="0 0 60 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        {/* Pram Hood & Carriage */}
+        <path d="M16 28 C16 18 28 18 34 22 L38 28 H16Z" stroke="currentColor" strokeWidth="1" fill="none" />
+        <path d="M16 28 C16 38 38 38 40 28 H16Z" stroke="currentColor" strokeWidth="1" fill="none" />
+        {/* Handle */}
+        <path d="M14 24 L10 20" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        {/* Wheels */}
+        <circle cx="22" cy="44" r="4.5" stroke="currentColor" strokeWidth="1" fill="none" />
+        <circle cx="22" cy="44" r="1.5" fill="currentColor" />
+        <circle cx="34" cy="44" r="4.5" stroke="currentColor" strokeWidth="1" fill="none" />
+        <circle cx="34" cy="44" r="1.5" fill="currentColor" />
+        {/* Frame connector */}
+        <line x1="22" y1="40" x2="28" y2="35" stroke="currentColor" strokeWidth="0.9" />
+        <line x1="34" y1="40" x2="28" y2="35" stroke="currentColor" strokeWidth="0.9" />
+      </svg>
+    );
+  }
+
+  if (type === 'holiday_pine') {
+    return (
+      <svg
+        width={size * 1.3}
+        height={size * 1.1}
+        viewBox="0 0 70 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        {/* Central stem */}
+        <path d="M15 50 C30 35 45 25 58 12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+        {/* Pine needles */}
+        <path d="M28 40 L20 32 M28 40 L24 45 M38 32 L30 24 M38 32 L36 38 M48 22 L40 14 M48 22 L46 28" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" />
+        <path d="M30 38 L36 30 M40 28 L46 20 M50 18 L55 12" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" />
+        {/* Winter berries */}
+        <circle cx="24" cy="46" r="2" fill="currentColor" />
+        <circle cx="28" cy="49" r="1.6" fill="currentColor" />
+        <circle cx="38" cy="38" r="1.8" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  if (type === 'balloon_minimal') {
+    return (
+      <svg
+        width={size * 1.2}
+        height={size * 1.2}
+        viewBox="0 0 60 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        {/* Center Balloon */}
+        <ellipse cx="30" cy="22" rx="10" ry="13" stroke="currentColor" strokeWidth="1" fill="none" />
+        <polygon points="30,35 28,38 32,38" fill="currentColor" />
+        <path d="M30 38 Q32 44 30 50" stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" fill="none" />
+        {/* Left Balloon */}
+        <ellipse cx="20" cy="25" rx="7" ry="9" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 1.5" fill="none" />
+        <path d="M20 34 Q24 42 28 50" stroke="currentColor" strokeWidth="0.6" strokeLinecap="round" fill="none" />
+        {/* Right Balloon */}
+        <ellipse cx="40" cy="25" rx="7" ry="9" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 1.5" fill="none" />
+        <path d="M40 34 Q36 42 32 50" stroke="currentColor" strokeWidth="0.6" strokeLinecap="round" fill="none" />
+      </svg>
+    );
+  }
+
+  if (type === 'gold_foil_laurel') {
+    return (
+      <svg
+        width={size * 1.5}
+        height={size * 1.1}
+        viewBox="0 0 90 70"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`${foilClass} ${className}`}
+        style={foil === 'none' ? { color } : undefined}
+      >
+        <path d="M45 55 C25 55 15 38 18 18" stroke="currentColor" strokeWidth="0.9" fill="none" />
+        <path d="M45 55 C65 55 75 38 72 18" stroke="currentColor" strokeWidth="0.9" fill="none" />
+        {/* Left Leaves */}
+        <path d="M20 22 C14 20 16 14 24 16 C22 20 20 22 20 22Z" fill="currentColor" fillOpacity="0.85" />
+        <path d="M18 32 C12 32 12 24 20 26 C19 30 18 32 18 32Z" fill="currentColor" fillOpacity="0.85" />
+        <path d="M20 42 C15 44 14 36 22 37 C21 40 20 42 20 42Z" fill="currentColor" fillOpacity="0.85" />
+        <path d="M26 50 C22 53 20 46 28 46 C27 49 26 50 26 50Z" fill="currentColor" fillOpacity="0.85" />
+        {/* Right Leaves */}
+        <path d="M70 22 C76 20 74 14 66 16 C68 20 70 22 70 22Z" fill="currentColor" fillOpacity="0.85" />
+        <path d="M72 32 C78 32 78 24 70 26 C71 30 72 32 72 32Z" fill="currentColor" fillOpacity="0.85" />
+        <path d="M70 42 C75 44 76 36 68 37 C69 40 70 42 70 42Z" fill="currentColor" fillOpacity="0.85" />
+        <path d="M64 50 C68 53 70 46 62 46 C63 49 64 50 64 50Z" fill="currentColor" fillOpacity="0.85" />
+        {/* Center Star */}
+        <polygon points="45,50 46.5,54 51,54 47.5,56.5 49,61 45,58 41,61 42.5,56.5 39,54 43.5,54" fill="currentColor" />
+      </svg>
+    );
+  }
+
   // minimal_geometric fallback
   return (
     <svg

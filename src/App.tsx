@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { CoupleDetails, SuiteCustomization, WeddingSuite } from './types';
-import { COLOR_PALETTES, DEFAULT_COUPLE_DETAILS, WEDDING_SUITES } from './data/weddingData';
+import { CardGeneralDetails, CoupleDetails, SuiteCustomization, WeddingSuite, GuestRSVPResponse } from './types';
+import { DEFAULT_COUPLE_DETAILS, WEDDING_SUITES } from './data/weddingData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { SuiteCatalog } from './components/SuiteCatalog';
 import { SuiteCustomizer } from './components/SuiteCustomizer';
 import { DigitalPhonePreviewModal } from './components/DigitalPhonePreviewModal';
-import { PrintGuideModal } from './components/PrintGuideModal';
-import { Sparkles, Heart, ArrowRight, Layers, Download, CheckCircle, Smartphone, Printer, Star } from 'lucide-react';
-import { WaxSealBadge } from './components/MotifGraphics';
+import { VirtualEnvelopeExperience } from './components/VirtualEnvelopeExperience';
+import { Sparkles, ArrowRight, Mail } from 'lucide-react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'catalog' | 'customizer'>('catalog');
   const [selectedSuite, setSelectedSuite] = useState<WeddingSuite>(WEDDING_SUITES[0]);
-  const [details, setDetails] = useState<CoupleDetails>(() => {
+  const [details, setDetails] = useState<CardGeneralDetails>(() => {
     const saved = localStorage.getItem('aura_vow_details');
     return saved ? JSON.parse(saved) : DEFAULT_COUPLE_DETAILS;
   });
@@ -26,16 +25,47 @@ export default function App() {
     borderStyle: 'single-thin',
     motif: WEDDING_SUITES[0].defaultMotif,
     showBleedAndCrop: false,
-    aspectRatioFormat: 'print-standard'
+    aspectRatioFormat: 'print-standard',
+    scheduleDisplayMode: 'timeline',
+    orderOfServiceLayout: 'single',
+    floralStyle: 'none',
+    envelope: {
+      envelopeColor: '#F7F4EE',
+      linerPattern: 'botanical',
+      sealType: 'wax-monogram',
+      sealColor: '#A68048',
+      addressedTo: 'Honored Guest & Loved Ones',
+      stampDesign: 'vintage-flower'
+    }
   }));
 
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
-  const [isPrintGuideModalOpen, setIsPrintGuideModalOpen] = useState(false);
+  const [isVirtualEnvelopeOpen, setIsVirtualEnvelopeOpen] = useState(false);
+  const [rsvpResponses, setRsvpResponses] = useState<GuestRSVPResponse[]>(() => {
+    const saved = localStorage.getItem('isle_note_rsvps');
+    return saved
+      ? JSON.parse(saved)
+      : [
+          {
+            id: 'demo-1',
+            guestName: 'Eleanor Vance & Guest',
+            attending: true,
+            guestCount: 2,
+            dietaryRestrictions: 'Vegetarian',
+            message: 'So thrilled to celebrate your special milestone! Cannot wait.',
+            submittedAt: 'Today, 2:15 PM'
+          }
+        ];
+  });
 
   // Save changes locally
   useEffect(() => {
     localStorage.setItem('aura_vow_details', JSON.stringify(details));
   }, [details]);
+
+  useEffect(() => {
+    localStorage.setItem('isle_note_rsvps', JSON.stringify(rsvpResponses));
+  }, [rsvpResponses]);
 
   // When selecting a new suite, adapt defaults
   const handleSelectSuite = (suite: WeddingSuite) => {
@@ -54,6 +84,17 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenEnvelopePreview = (suite?: WeddingSuite) => {
+    if (suite) {
+      handleSelectSuite(suite);
+    }
+    setIsVirtualEnvelopeOpen(true);
+  };
+
+  const handleAddRSVPResponse = (res: GuestRSVPResponse) => {
+    setRsvpResponses((prev) => [res, ...prev]);
+  };
+
   return (
     <div id="app-root" className="min-h-screen bg-[#FAF8F5] text-[#2C241E] flex flex-col font-sans-clean antialiased selection:bg-[#EAE0D0] selection:text-[#3B3026]">
       {/* Top Header */}
@@ -63,7 +104,6 @@ export default function App() {
           setCurrentView(view);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onOpenPrintGuide={() => setIsPrintGuideModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -77,29 +117,30 @@ export default function App() {
             <div className="relative z-10 max-w-3xl mx-auto space-y-5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/80 backdrop-blur-xs text-[#6B5A4B] text-xs font-medium rounded-full border border-[#DED3C1] shadow-2xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>The Digital Wedding Stationery Atelier</span>
+                <span>Modern Minimalist Invitations &amp; Greeting Atelier</span>
               </div>
 
               <h1 className="font-cormorant text-4xl sm:text-6xl font-normal tracking-tight text-[#2B231D] leading-[1.1]">
-                Personalize & Download Your Complete{' '}
+                Every Milestone, Thoughtfully{' '}
                 <span className="italic font-normal font-cormorant text-[#685544]">
-                  Wedding Suite
+                  Crafted &amp; Sent
                 </span>
               </h1>
 
               <p className="text-sm sm:text-base text-[#6E5F52] leading-relaxed max-w-2xl mx-auto">
-                Bespoke 8-piece stationery collections: invitations, RSVP reply cards, order of events, dinner menus, and keepsake planners. Customize your names, dates, colors, and download instantly.
+                Discover curated cards and invitations for Weddings, Birthdays, Baby Showers, Holidays, and Cocktail Soirées. Personalize your card, download high-res PNG &amp; JPEG images, animated eCard GIFs, or send interactive virtual envelopes with instant RSVP tracking.
               </p>
 
-              {/* Suite Item Pills */}
+              {/* Occasion Item Pills */}
               <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs">
                 {[
-                  '💌 Wedding Invitations (5×7")',
-                  '✉️ RSVP Cards',
-                  '⏳ Day-of Schedule',
-                  '🍷 Dinner Menus',
-                  '🏷️ Place Cards',
-                  '🤍 Thank You Notes'
+                  '💍 Wedding Invitations',
+                  '🎂 Milestone Birthdays',
+                  '🍼 Baby Shower Cards',
+                  '🌲 Holiday & New Year',
+                  '🍸 Cocktail Soirées',
+                  '💌 Folded Greeting Cards',
+                  '✉️ Digital Envelopes with RSVP'
                 ].map((item, idx) => (
                   <span
                     key={idx}
@@ -117,17 +158,17 @@ export default function App() {
                   onClick={() => handleOpenCustomizer(selectedSuite)}
                   className="px-6 py-3 bg-[#3A322B] hover:bg-[#231E1A] text-[#FAF5ED] text-xs font-semibold rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <span>Customize Selected Suite</span>
+                  <span>Start Personalizing</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
                 <button
-                  id="hero-guide-btn"
-                  onClick={() => setIsPrintGuideModalOpen(true)}
+                  id="hero-envelope-btn"
+                  onClick={() => handleOpenEnvelopePreview(selectedSuite)}
                   className="px-5 py-3 bg-white hover:bg-[#FAF6EF] text-[#4A3E34] text-xs font-medium rounded-full border border-[#D8CDBC] shadow-2xs transition-colors flex items-center gap-2 cursor-pointer"
                 >
-                  <Printer className="w-3.5 h-3.5 text-[#8A7968]" />
-                  <span>Paper & Print Guide</span>
+                  <Mail className="w-3.5 h-3.5 text-[#8A7968]" />
+                  <span>Preview Digital eCard &amp; RSVP</span>
                 </button>
               </div>
             </div>
@@ -137,25 +178,12 @@ export default function App() {
         {/* VIEW: CATALOG OF SUITES */}
         {currentView === 'catalog' && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#E8DFC9] pb-4">
-              <div>
-                <h2 className="text-xl sm:text-2xl font-serif font-semibold text-[#2C241E]">
-                  Curated Wedding Suites
-                </h2>
-                <p className="text-xs text-[#7A6C5F]">
-                  Select any design below to customize colors, couples' details, and download print-ready files.
-                </p>
-              </div>
-              <span className="text-xs text-[#8C7A6B] font-medium">
-                {WEDDING_SUITES.length} Designer Collections Available
-              </span>
-            </div>
-
             <SuiteCatalog
               suites={WEDDING_SUITES}
               selectedSuite={selectedSuite}
               onSelectSuite={handleSelectSuite}
               onOpenCustomizer={handleOpenCustomizer}
+              onOpenEnvelopePreview={handleOpenEnvelopePreview}
             />
           </div>
         )}
@@ -169,7 +197,7 @@ export default function App() {
             onUpdateDetails={setDetails}
             onUpdateCustomization={setCustomization}
             onOpenMobilePreview={() => setIsMobileModalOpen(true)}
-            onOpenPrintGuide={() => setIsPrintGuideModalOpen(true)}
+            onOpenVirtualEnvelope={() => setIsVirtualEnvelopeOpen(true)}
             onBackToCatalog={() => {
               setCurrentView('catalog');
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -187,15 +215,19 @@ export default function App() {
         customization={customization}
       />
 
-      {/* Fine Art Paper & Print Guide Modal */}
-      <PrintGuideModal
-        isOpen={isPrintGuideModalOpen}
-        onClose={() => setIsPrintGuideModalOpen(false)}
+      {/* Interactive Virtual Envelope & eCard Experience Modal */}
+      <VirtualEnvelopeExperience
+        isOpen={isVirtualEnvelopeOpen}
+        onClose={() => setIsVirtualEnvelopeOpen(false)}
+        template={selectedSuite}
+        details={details}
+        customization={customization}
+        onAddRSVPResponse={handleAddRSVPResponse}
+        existingRSVPs={rsvpResponses}
       />
 
       {/* Footer */}
       <Footer
-        onOpenPrintGuide={() => setIsPrintGuideModalOpen(true)}
         onNavigate={(view) => {
           setCurrentView(view);
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -204,3 +236,4 @@ export default function App() {
     </div>
   );
 }
+

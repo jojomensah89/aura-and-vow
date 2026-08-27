@@ -6,7 +6,33 @@ export type CardItemType =
   | 'thankyou' 
   | 'placecard' 
   | 'details' 
-  | 'planner';
+  | 'planner'
+  | 'greeting_card'
+  | 'birthday_card'
+  | 'holiday_card'
+  | 'baby_card'
+  | 'party_card';
+
+export type CardFormat = 
+  | 'flat-5x7' 
+  | 'folded-card' 
+  | 'flat-4x6' 
+  | 'square' 
+  | 'stationery-suite'
+  | 'suite-8piece';
+
+export type OccasionCategory = 
+  | 'all'
+  | 'weddings'
+  | 'birthdays'
+  | 'baby'
+  | 'baby-shower'
+  | 'greeting-cards'
+  | 'holidays'
+  | 'social'
+  | 'party-dinner'
+  | 'milestones'
+  | 'stationery-suites';
 
 export type StyleCategory = 
   | 'all'
@@ -18,10 +44,11 @@ export type StyleCategory =
   | 'art-deco' 
   | 'tuscan' 
   | 'boho' 
-  | 'regal';
+  | 'regal'
+  | 'modern-playful';
 
-export type FoilType = 'gold' | 'rose-gold' | 'silver' | 'none';
-export type PaperFinish = 'smooth' | 'linen' | 'deckled' | 'cotton';
+export type FoilType = 'gold' | 'rose-gold' | 'silver' | 'copper' | 'none';
+export type PaperFinish = 'smooth' | 'linen' | 'deckled' | 'cotton' | 'kraft' | 'pearlized';
 export type BorderStyle = 
   | 'none' 
   | 'single-thin' 
@@ -66,6 +93,12 @@ export type MotifType =
   | 'blush_rose_corner'
   | 'peony_bloom'
   | 'gold_foil_laurel'
+  | 'birthday_cake'
+  | 'cocktail_glass'
+  | 'sparkle_stars'
+  | 'baby_stroller'
+  | 'holiday_pine'
+  | 'balloon_minimal'
   | 'none';
 
 export interface ScheduleEvent {
@@ -101,24 +134,69 @@ export interface MenuCourse {
   description: string;
 }
 
-export interface CoupleDetails {
+export interface GuestRSVPResponse {
+  id: string;
+  guestName: string;
+  email?: string;
+  attending: boolean;
+  guestCount: number;
+  dietaryRestrictions?: string;
+  message?: string;
+  submittedAt: string;
+}
+
+export interface EnvelopeCustomization {
+  envelopeColor: string;
+  linerPattern: 'marble' | 'botanical' | 'gold-speckle' | 'minimalist-stripes' | 'solid-silk' | 'none';
+  sealType: 'wax-monogram' | 'botanical-stamp' | 'gold-foil-heart' | 'modern-minimal' | 'none';
+  sealColor: string;
+  addressedTo?: string;
+  stampDesign: 'vintage-flower' | 'botanical-gold' | 'minimal-modern' | 'love-letter';
+}
+
+export interface CardGeneralDetails {
+  // Common details
+  title: string;
+  headline: string;
+  honoreeOrCouple: string;
+  secondaryHonoree?: string;
+  eventDate: string;
+  eventTime: string;
+  venueName: string;
+  venueAddress: string;
+  cityState: string;
+  hostName: string;
+  subtext: string;
+  rsvpDeadline: string;
+  rsvpWebsite: string;
+  rsvpPhoneOrEmail: string;
+  rsvpEmail?: string;
+  dressCode?: string;
+  registryInfo?: string;
+  
+  // Folded card & Greeting specific
+  greetingHeadline: string;
+  insideLeftText: string;
+  insideRightMessage: string;
+  insideRightPersonalMessage?: string;
+  senderSignoff: string;
+  
+  // Custom Photo Card
+  photoUrl?: string;
+  customPhotoUrl?: string;
+  photoCaption?: string;
+  
+  // Wedding suite compatibility
   partner1FirstName: string;
   partner1LastName: string;
   partner2FirstName: string;
   partner2LastName: string;
   weddingDate: string;
   weddingTime: string;
-  venueName: string;
-  venueAddress: string;
-  cityState: string;
   monogramText: string;
   invitationHeadline: string;
   ceremonySubtext: string;
   receptionDetails: string;
-  dressCode: string;
-  rsvpDeadline: string;
-  rsvpWebsite: string;
-  rsvpEmail: string;
   rsvpNotes: string;
   accommodationsNote: string;
   thankYouMessage: string;
@@ -127,7 +205,6 @@ export interface CoupleDetails {
   placeCardMealChoice: string;
   scheduleEvents: ScheduleEvent[];
   menuCourses: MenuCourse[];
-  // Order of Service Specific Fields
   ceremonyHeaderTitle: string;
   ceremonySubtitle: string;
   churchParish: string;
@@ -136,6 +213,8 @@ export interface CoupleDetails {
   ceremonyParts: CeremonyPart[];
   bridalParty: BridalPartyDetails;
 }
+
+export type CoupleDetails = CardGeneralDetails;
 
 export interface ColorPalette {
   id: string;
@@ -159,12 +238,15 @@ export interface FontPreset {
   bodyFont: string;
 }
 
-export interface WeddingSuite {
+export interface GreetingTemplate {
   id: string;
   title: string;
+  category?: OccasionCategory;
+  subcategory?: string;
   collectionName: string;
   tagline: string;
   description: string;
+  format?: CardFormat;
   styleCategory: StyleCategory;
   defaultPalette: ColorPalette;
   defaultFontPreset: string;
@@ -174,11 +256,16 @@ export interface WeddingSuite {
   rating: number;
   downloadCount: number;
   accentAccentColor: string;
+  hasPhotoSlot?: boolean;
+  samplePhotoUrl?: string;
   includedItems: CardItemType[];
   tags: string[];
   defaultScheduleMode?: 'timeline' | 'order_of_service';
   defaultOrderOfServiceLayout?: 'single' | 'two_column';
+  defaultDetails?: Partial<CardGeneralDetails>;
 }
+
+export type WeddingSuite = GreetingTemplate;
 
 export interface SuiteCustomization {
   palette: ColorPalette;
@@ -198,4 +285,8 @@ export interface SuiteCustomization {
   aspectRatioFormat: 'print-standard' | 'mobile-story' | 'square';
   scheduleDisplayMode: 'timeline' | 'order_of_service';
   orderOfServiceLayout: 'single' | 'two_column';
+  
+  // Greeting card view & envelope
+  activeFoldPage?: 'front' | 'inside-left' | 'inside-right' | 'back';
+  envelope: EnvelopeCustomization;
 }

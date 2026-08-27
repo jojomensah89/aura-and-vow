@@ -1,6 +1,6 @@
 {
-  "name": "Aura & Vow | Bespoke Digital Wedding Suites",
-  "description": "Browse, personalize, and download luxury digital wedding stationery suites including invitations, RSVP cards, schedules, menus, and thank you cards.",
+  "name": "Isle & Note | Modern Minimalist Invitations & Greeting Cards",
+  "description": "Design, personalize, print and share modern minimalist invitations, greeting cards, and event stationery for weddings, birthdays, baby showers, holidays, and milestones.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

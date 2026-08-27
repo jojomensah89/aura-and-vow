@@ -20,6 +20,11 @@ declare module '*.svg' {
   export default content;
 }
 
+declare module 'gifshot' {
+  const gifshot: any;
+  export default gifshot;
+}
+
 declare module '*.webp' {
   const content: string;
   export default content;
